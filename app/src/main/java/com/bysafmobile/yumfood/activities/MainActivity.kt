@@ -1,9 +1,10 @@
-package com.bysafmobile.yumfood
+package com.bysafmobile.yumfood.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.bysafmobile.yumfood.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
