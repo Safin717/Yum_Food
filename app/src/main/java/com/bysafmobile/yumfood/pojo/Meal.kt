@@ -1,4 +1,4 @@
-package com.bysafmobile.yumfood.data
+package com.bysafmobile.yumfood.pojo
 
 
 import com.google.gson.annotations.SerializedName

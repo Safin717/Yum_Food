@@ -38,6 +38,7 @@
     </com.google.android.material.appbar.AppBarLayout>
     
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_to_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_favorites"
@@ -69,6 +70,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
+                    android:id="@+id/tv_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Category: Beef"
@@ -80,6 +82,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/tv_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Area: Palestine"
@@ -107,6 +110,7 @@
             </TextView>
 
             <TextView
+                android:id="@+id/tv_instructions_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/tv_instructions"
@@ -124,6 +128,14 @@
         android:layout_gravity="bottom|center"
         android:src="@drawable/ic_youtube"
         android:layout_marginBottom="@dimen/_10sdp">
-
     </ImageView>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/linear_progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
