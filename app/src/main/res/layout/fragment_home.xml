@@ -36,12 +36,14 @@
                     android:textSize="@dimen/_25ssp"
                     android:textStyle="bold"/>
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_search"
-                    android:layout_width="@dimen/_30sdp"
+                    android:layout_width="@dimen/_40sdp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_search"/>
+                    android:src="@drawable/ic_search"
+                    app:shapeAppearanceOverlay="@style/roundedImageView"
+                    android:background="@color/accent" />
             </LinearLayout>
 
             <TextView
@@ -51,7 +53,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/myfont"
                 android:text="What would you like to eat"
-                android:textColor="@color/black"
+                style="@style/Theme.YumFood"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/linear_header"
@@ -85,7 +87,7 @@
                 android:layout_marginTop="@dimen/_18sdp"
                 android:fontFamily="@font/myfont"
                 android:text="Over popular items"
-                android:textColor="@color/black"
+                style="@style/Theme.YumFood"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/tv_would_like_to_eat"
@@ -107,7 +109,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/myfont"
                 android:text="Categories"
-                android:textColor="@color/black"
+                style="@style/Theme.YumFood"
                 android:textSize="@dimen/_17ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/rcView_meals_popular"
