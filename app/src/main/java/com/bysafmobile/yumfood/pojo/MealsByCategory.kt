@@ -3,7 +3,7 @@ package com.bysafmobile.yumfood.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class CategoryMeals(
+data class MealsByCategory(
     @SerializedName("idMeal")
     val idMeal: String, // 52959
     @SerializedName("strMeal")

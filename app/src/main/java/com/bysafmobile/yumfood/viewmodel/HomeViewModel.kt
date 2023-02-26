@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bysafmobile.yumfood.pojo.CategoryList
-import com.bysafmobile.yumfood.pojo.CategoryMeals
-import com.bysafmobile.yumfood.pojo.Meal
-import com.bysafmobile.yumfood.pojo.MealList
+import com.bysafmobile.yumfood.pojo.*
 import com.bysafmobile.yumfood.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,7 +14,8 @@ class HomeViewModel(): ViewModel() {
 
     // MutableLiveData используется для записи измененного значения
     private var randomMealLiveData = MutableLiveData<Meal>()
-    private var popularItemsLiveData = MutableLiveData<List<CategoryMeals>>()
+    private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
+    private var categoriesLiveData = MutableLiveData<List<Category>>()
 
     // метод получения рандомного блюда
     fun getRandomMeal(){
@@ -44,10 +42,10 @@ class HomeViewModel(): ViewModel() {
 
     // метод для получения популярных блюд в RecyclerView
     fun getPopularItems(){
-        RetrofitInstance.api.getPopularItems("Seafood").enqueue(object :Callback<CategoryList>{
+        RetrofitInstance.api.getPopularItems("Seafood").enqueue(object : Callback<MealsByCategoryList>{
             // Retrofit подключен к API
             // получаем список о еде
-            override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
+            override fun onResponse(call: Call<MealsByCategoryList>, response: Response<MealsByCategoryList>) {
                 // если ответ не пустой
                 if(response.body() != null){
                     // заполняем полученный ответ в значение MutableLiveData
@@ -55,10 +53,23 @@ class HomeViewModel(): ViewModel() {
                 }
             }
             // если соединение неуспешно
-            override fun onFailure(call: Call<CategoryList>, t: Throwable) {
+            override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
                 Log.d("HomeFragment",t.message.toString())
             }
 
+        })
+    }
+
+    fun getCategories(){
+        RetrofitInstance.api.getCategories().enqueue(object : Callback<CategoryList>{
+            override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
+                if(response.body() != null){
+                    categoriesLiveData.value = response.body()!!.categories
+                }
+            }
+            override fun onFailure(call: Call<CategoryList>, t: Throwable) {
+                Log.d("HomeViewModel",t.message.toString())
+            }
         })
     }
     // LiveData только читает данные, а в MutableLiveData мы можем менять значение
@@ -69,7 +80,10 @@ class HomeViewModel(): ViewModel() {
     }
 
     // фун-ия для прослушивания обновлений в LiveData
-    fun observePopularItemsLiveData(): LiveData<List<CategoryMeals>>{
+    fun observePopularItemsLiveData(): LiveData<List<MealsByCategory>>{
         return popularItemsLiveData
+    }
+    fun observeCategoriesLiveData():LiveData<List<Category>>{
+        return categoriesLiveData
     }
 }

@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bysafmobile.yumfood.databinding.PopularItemsBinding
-import com.bysafmobile.yumfood.pojo.CategoryMeals
+import com.bysafmobile.yumfood.pojo.MealsByCategory
 
 class MostPopularAdapter:RecyclerView.Adapter<MostPopularAdapter.PopularMealViewHolder>() {
     // инициализируем переменную mealsList
-    private var mealsList = ArrayList<CategoryMeals>()
-    lateinit var onItemClick:((CategoryMeals) -> Unit)
+    private var mealsList = ArrayList<MealsByCategory>()
+    lateinit var onItemClick:((MealsByCategory) -> Unit)
 
     // каждый раз когда нужно установить новый список
     // мы обновляем наш адаптер, когда обновились данные во view
-    fun setMeals(mealsList:ArrayList<CategoryMeals>){
+    fun setMeals(mealsList:ArrayList<MealsByCategory>){
         this.mealsList = mealsList
         notifyDataSetChanged()
     }
