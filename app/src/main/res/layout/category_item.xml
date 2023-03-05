@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="@dimen/_15ssp"
         android:text="Category Name"
-        android:textColor="@color/black"
+        style="@style/Theme.YumFood"
         android:fontFamily="@font/myfont"
         android:layout_marginTop="@dimen/_3sdp"/>
 
