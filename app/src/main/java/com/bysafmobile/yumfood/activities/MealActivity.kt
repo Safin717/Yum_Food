@@ -6,14 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bysafmobile.yumfood.R
 import com.bysafmobile.yumfood.pojo.Meal
 import com.bysafmobile.yumfood.databinding.ActivityMealBinding
+import com.bysafmobile.yumfood.db.MealDatabase
 import com.bysafmobile.yumfood.fragments.HomeFragment
 import com.bysafmobile.yumfood.viewmodel.MealViewModel
+import com.bysafmobile.yumfood.viewmodel.MealViewModelFactory
 
 class MealActivity : AppCompatActivity() {
     // создадим переменные, которые используются в активити
@@ -29,7 +32,9 @@ class MealActivity : AppCompatActivity() {
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mealMvvm = ViewModelProvider(this)[MealViewModel::class.java]
+        val mealDatabase = MealDatabase.getInstance(this)
+        val viewModelFactory = MealViewModelFactory(mealDatabase)
+        mealMvvm = ViewModelProvider(this, viewModelFactory)[MealViewModel::class.java]
 
         getMealInformationFromIntent()
         setInformationInViews()
@@ -38,7 +43,17 @@ class MealActivity : AppCompatActivity() {
         mealMvvm.getMealDetails(mealId)
         observerMealDetailsLiveData()
         onYoutubeImageClick()
+        onFavouriteClick()
     }
+    private fun onFavouriteClick() {
+        binding.btnAddToFav.setOnClickListener {
+            mealToSave?.let {
+                mealMvvm.insertMeal(it)
+                Toast.makeText(this, "Meal saved", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
     // при нажатии на изображение Youtube
     private fun onYoutubeImageClick() {
         // откроется новый Intent
@@ -52,11 +67,13 @@ class MealActivity : AppCompatActivity() {
 
     // метод прослушивает обновления о подробной информации
     // о каждом блюде из MealViewModel
+    private var mealToSave:Meal? = null
     private fun observerMealDetailsLiveData() {
         mealMvvm.observeMealDetailLiveData().observe(this) { t ->
             onResponseCase()
             // получаем объект t конкретное блюдо
             val meal = t
+            mealToSave = meal
             // заполняем каждый элемент View через binding
             binding.tvCategory.text = "Category: ${meal!!.strCategory}"
             binding.tvArea.text = "Area : ${meal.strArea}"
