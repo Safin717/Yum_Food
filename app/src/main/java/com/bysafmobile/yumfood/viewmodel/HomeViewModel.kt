@@ -4,15 +4,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.bysafmobile.yumfood.db.MealDatabase
 import com.bysafmobile.yumfood.pojo.*
 import com.bysafmobile.yumfood.retrofit.RetrofitInstance
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel(
-    mealDatabase: MealDatabase
+    private val mealDatabase: MealDatabase
 ): ViewModel() {
 
     // MutableLiveData используется для записи измененного значения
@@ -76,6 +78,18 @@ class HomeViewModel(
             }
         })
     }
+    fun insertMeal(meal: Meal){
+        viewModelScope.launch {
+            mealDatabase.mealDao().upsert(meal)
+        }
+    }
+
+    fun deleteMeal(meal: Meal){
+        viewModelScope.launch {
+            mealDatabase.mealDao().delete(meal)
+        }
+    }
+
     // LiveData только читает данные, а в MutableLiveData мы можем менять значение
     // LiveData используется для уведомления пользовательского интерфейса об изменении значения
     // поэтому мы вызываем этот метод из HomeFragment, чтобы прослушивать любые обновления, сделанные MutableLiveData.
