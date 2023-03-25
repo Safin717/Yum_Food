@@ -11,6 +11,7 @@ class MostPopularAdapter:RecyclerView.Adapter<MostPopularAdapter.PopularMealView
     // инициализируем переменную mealsList
     private var mealsList = ArrayList<MealsByCategory>()
     lateinit var onItemClick:((MealsByCategory) -> Unit)
+    var onLongItemClick:((MealsByCategory) -> Unit)? = null
 
     // каждый раз когда нужно установить новый список
     // мы обновляем наш адаптер, когда обновились данные во view
@@ -33,6 +34,11 @@ class MostPopularAdapter:RecyclerView.Adapter<MostPopularAdapter.PopularMealView
         // добавим слушатель нажатий в RecyclerView
         holder.itemView.setOnClickListener {
             onItemClick.invoke(mealsList[position])
+        }
+
+        holder.itemView.setOnLongClickListener {
+            onLongItemClick?.invoke(mealsList[position])
+            true
         }
     }
 

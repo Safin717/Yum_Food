@@ -17,6 +17,7 @@ import com.bysafmobile.yumfood.adapters.CategoriesAdapter
 import com.bysafmobile.yumfood.adapters.MostPopularAdapter
 import com.bysafmobile.yumfood.pojo.Meal
 import com.bysafmobile.yumfood.databinding.FragmentHomeBinding
+import com.bysafmobile.yumfood.fragments.bottomsheet.MealBottomSheetFragment
 import com.bysafmobile.yumfood.pojo.MealsByCategory
 import com.bysafmobile.yumfood.viewmodel.HomeViewModel
 
@@ -69,6 +70,15 @@ class HomeFragment : Fragment() {
         viewModel.getCategories()
         observeCategoriesLiveData()
         onCategoryClick()
+
+        onPopularItemLongClick()
+    }
+
+    private fun onPopularItemLongClick() {
+        popularItemsAdapter.onLongItemClick = {meal ->
+            val mealBottomSheetFragment = MealBottomSheetFragment.newInstance(meal.idMeal)
+            mealBottomSheetFragment.show(childFragmentManager, "Meal Info")
+        }
     }
 
     private fun onCategoryClick() {
