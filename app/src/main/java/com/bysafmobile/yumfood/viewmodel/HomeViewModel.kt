@@ -4,18 +4,22 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bysafmobile.yumfood.db.MealDatabase
 import com.bysafmobile.yumfood.pojo.*
 import com.bysafmobile.yumfood.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel(): ViewModel() {
+class HomeViewModel(
+    mealDatabase: MealDatabase
+): ViewModel() {
 
     // MutableLiveData используется для записи измененного значения
     private var randomMealLiveData = MutableLiveData<Meal>()
     private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
     private var categoriesLiveData = MutableLiveData<List<Category>>()
+    private var favouritesMealsLiveData = mealDatabase.mealDao().getAllMeals()
 
     // метод получения рандомного блюда
     fun getRandomMeal(){
@@ -85,5 +89,8 @@ class HomeViewModel(): ViewModel() {
     }
     fun observeCategoriesLiveData():LiveData<List<Category>>{
         return categoriesLiveData
+    }
+    fun observeFavouritesMealsLiveData():LiveData<List<Meal>>{
+        return favouritesMealsLiveData
     }
 }
