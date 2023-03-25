@@ -24,8 +24,14 @@ class HomeViewModel(
     private var favouritesMealsLiveData = mealDatabase.mealDao().getAllMeals()
     private var bottomSheetMealLiveData = MutableLiveData<Meal>()
 
+    private var saveStateRandomMeal : Meal ? = null
+
     // метод получения рандомного блюда
     fun getRandomMeal(){
+        saveStateRandomMeal?.let {randomMeal ->
+            randomMealLiveData.postValue(randomMeal)
+            return
+        }
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList> {
             // Retrofit подключен к API
             // получаем информацию о случайной еде
@@ -36,6 +42,7 @@ class HomeViewModel(
                     val randomMeal: Meal = response.body()!!.meals[0]
                     // передаем randomMeal в значение MutableLiveData
                     randomMealLiveData.value = randomMeal
+                    saveStateRandomMeal = randomMeal
                 }else{
                     return
                 }

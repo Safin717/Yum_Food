@@ -24,7 +24,7 @@ import com.bysafmobile.yumfood.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var homeViewModel: HomeViewModel
     private lateinit var randomMeal: Meal
     private lateinit var popularItemsAdapter: MostPopularAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = (activity as MainActivity).viewModel
+        homeViewModel = (activity as MainActivity).viewModel
         popularItemsAdapter = MostPopularAdapter()
     }
 
@@ -58,16 +58,16 @@ class HomeFragment : Fragment() {
 
         preparePopularItemsRecyclerView()
 
-        viewModel.getRandomMeal()
+        homeViewModel.getRandomMeal()
         observerRandomMeal()
         onRandomMealClick()
 
-        viewModel.getPopularItems()
+        homeViewModel.getPopularItems()
         observePopularItemsLiveData()
         onPopularItemClick()
 
         prepareCategoriesRecyclerView()
-        viewModel.getCategories()
+        homeViewModel.getCategories()
         observeCategoriesLiveData()
         onCategoryClick()
 
@@ -99,7 +99,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeCategoriesLiveData() {
-        viewModel.observeCategoriesLiveData().observe(viewLifecycleOwner) { categories ->
+        homeViewModel.observeCategoriesLiveData().observe(viewLifecycleOwner) { categories ->
             categoriesAdapter.setCategoryList(categories)
         }
     }
@@ -122,7 +122,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observePopularItemsLiveData() {
-        viewModel.observePopularItemsLiveData().observe(viewLifecycleOwner){ mealList ->
+        homeViewModel.observePopularItemsLiveData().observe(viewLifecycleOwner){ mealList ->
             popularItemsAdapter.setMeals(mealsList = mealList as ArrayList<MealsByCategory>)
         }
     }
@@ -142,7 +142,7 @@ class HomeFragment : Fragment() {
     }
     // метод следит за обновлениями RandomMeal LiveData
     private fun observerRandomMeal() {
-        viewModel.observeRandomMealLiveData().observe(viewLifecycleOwner) { meal ->
+        homeViewModel.observeRandomMealLiveData().observe(viewLifecycleOwner) { meal ->
             // загружаем картинку RandomMeal во View
             Glide.with(this@HomeFragment)
                     .load(meal!!.strMealThumb)
