@@ -12,7 +12,9 @@
 ## https://play.google.com/store/apps/details?id=com.bysafmobile.appmovie2
 
 ### Screenshots of the application:
-<img src="https://github.com/Safin717/MovieApp/blob/main/1.png" width="400">
-<img src="https://github.com/Safin717/MovieApp/blob/main/2.png" width="400">
-<img src="https://github.com/Safin717/MovieApp/blob/main/3.png" width="400">
-<img src="https://github.com/Safin717/MovieApp/blob/main/4.png" width="400">
+<img src="https://github.com/Safin717/Yum_Food/blob/master/1.jpg" width="400">
+<img src="https://github.com/Safin717/Yum_Food/blob/master/2.jpg" width="400">
+<img src="https://github.com/Safin717/Yum_Food/blob/master/3.jpg" width="400">
+<img src="https://github.com/Safin717/Yum_Food/blob/master/4.jpg" width="400">
+<img src="https://github.com/Safin717/Yum_Food/blob/master/5.jpg" width="400">
+<img src="https://github.com/Safin717/Yum_Food/blob/master/6.jpg" width="400">
