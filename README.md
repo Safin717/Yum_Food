@@ -1,15 +1,17 @@
 # Yum_Food
 
-## It's my first Android application in Github repository. Using my application you can find the most popular films of the last year, as well as see detailed information about each of them.
+## Using my application you can find the most popular recipes of various meals of the world, as well as see detailed information about each of them.
+## You can choose by category, save or delete your favorite meals, so that you can cook it later. there is a button that opens the video on YouTube with cooking
 
 ### Technologies and depe used in the application: 
+### MVVM architecture
 ### Retrofit 
-### OkHttp3
-### Gson
-### Coil library to load images.
+### Room Database
+### Fragments, ViewModels
+### Glide
 
 ## You can download this app from the Play Market Store by following this link:
-## https://play.google.com/store/apps/details?id=com.bysafmobile.appmovie2
+## coming soon..
 
 ### Screenshots of the application:
 <img src="https://github.com/Safin717/Yum_Food/blob/master/1.jpg" width="400">
