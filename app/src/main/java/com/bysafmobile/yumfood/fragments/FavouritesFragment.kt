@@ -1,7 +1,6 @@
 package com.bysafmobile.yumfood.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.bysafmobile.yumfood.R
 import com.bysafmobile.yumfood.activities.MainActivity
-import com.bysafmobile.yumfood.adapters.FavouritesMealsAdapter
+import com.bysafmobile.yumfood.adapters.MealsAdapter
 import com.bysafmobile.yumfood.databinding.FragmentFavouritesBinding
 import com.bysafmobile.yumfood.viewmodel.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -21,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 class FavouritesFragment : Fragment() {
     private lateinit var binding:FragmentFavouritesBinding
     private lateinit var viewModel:HomeViewModel
-    private lateinit var favouritesAdapter:FavouritesMealsAdapter
+    private lateinit var favouritesAdapter:MealsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
@@ -71,7 +69,7 @@ class FavouritesFragment : Fragment() {
     }
 
     private fun prepareRecyclerViewFavourites() {
-        favouritesAdapter = FavouritesMealsAdapter()
+        favouritesAdapter = MealsAdapter()
         binding.rcFavourites.apply {
             layoutManager = GridLayoutManager(context, 2,GridLayoutManager.VERTICAL, false )
             adapter = favouritesAdapter

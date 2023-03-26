@@ -23,6 +23,7 @@ class HomeViewModel(
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favouritesMealsLiveData = mealDatabase.mealDao().getAllMeals()
     private var bottomSheetMealLiveData = MutableLiveData<Meal>()
+    private val searchedMealsLiveData = MutableLiveData<List<Meal>>()
 
     private var saveStateRandomMeal : Meal ? = null
 
@@ -113,6 +114,23 @@ class HomeViewModel(
         }
     }
 
+    fun searchMeals(searchQuery: String){
+        RetrofitInstance.api.searchMeals(searchQuery).enqueue(
+            object : Callback<MealList>{
+                override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
+                    val mealsList = response.body()?.meals
+                    mealsList?.let {
+                        searchedMealsLiveData.postValue(it)
+                    }
+                }
+
+                override fun onFailure(call: Call<MealList>, t: Throwable) {
+                    Log.e("HomeViewModel", t.message.toString())
+                }
+            }
+        )
+    }
+
     // LiveData только читает данные, а в MutableLiveData мы можем менять значение
     // LiveData используется для уведомления пользовательского интерфейса об изменении значения
     // поэтому мы вызываем этот метод из HomeFragment, чтобы прослушивать любые обновления, сделанные MutableLiveData.
@@ -132,5 +150,8 @@ class HomeViewModel(
     }
     fun observeBottomSheetMealLiveData():LiveData<Meal>{
         return bottomSheetMealLiveData
+    }
+    fun observeSearchedMealsLiveData():LiveData<List<Meal>>{
+        return searchedMealsLiveData
     }
 }
