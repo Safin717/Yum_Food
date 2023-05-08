@@ -11,7 +11,7 @@
 ### Glide
 
 ## You can download this app from the Play Market Store by following this link:
-## coming soon..
+## https://play.google.com/store/apps/details?id=com.bysafmobile.yumfood
 
 ### Screenshots of the application:
 <img src="https://github.com/Safin717/Yum_Food/blob/master/1.jpg" width="400">
